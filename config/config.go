@@ -5,7 +5,6 @@ import (
 	"github.com/kelseyhightower/envconfig"
 	"gopkg.in/yaml.v3"
 	"os"
-	"runtime"
 )
 
 type Config struct {
@@ -29,14 +28,7 @@ func New() *Config {
 		fmt.Println(err)
 		os.Exit(2)
 	}
-	config.ConfigRuntime()
 	return config
-}
-
-func (conf *Config) ConfigRuntime() {
-	nuCPU := runtime.NumCPU()
-	runtime.GOMAXPROCS(nuCPU)
-	fmt.Printf("Running with %d CPUs\n", nuCPU)
 }
 
 func readFile(cfg *Config) error {
